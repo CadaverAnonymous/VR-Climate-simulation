@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ceiling Light with Chain
+* source:	https://sketchfab.com/3d-models/ceiling-light-with-chain-7467af164bd64d0db09565b70b216e12
+* author:	rhcreations (https://sketchfab.com/rhcreations)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ceiling Light with Chain" (https://sketchfab.com/3d-models/ceiling-light-with-chain-7467af164bd64d0db09565b70b216e12) by rhcreations (https://sketchfab.com/rhcreations) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

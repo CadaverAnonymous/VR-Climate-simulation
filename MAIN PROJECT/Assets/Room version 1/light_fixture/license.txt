@@ -1,0 +1,11 @@
+Model Information:
+* title:	Light Fixture
+* source:	https://sketchfab.com/3d-models/light-fixture-3791f72ddbce427090e1d15b5f3d5ae0
+* author:	Newsome Interactive (https://sketchfab.com/newsomellc)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Light Fixture" (https://sketchfab.com/3d-models/light-fixture-3791f72ddbce427090e1d15b5f3d5ae0) by Newsome Interactive (https://sketchfab.com/newsomellc) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
