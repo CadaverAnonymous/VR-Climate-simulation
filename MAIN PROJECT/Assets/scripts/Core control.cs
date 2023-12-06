@@ -21,7 +21,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Vector3 Raycast;
     public bool devmode = true;
     public float globeSpinningForce = 1000.0f;
-    public float rotationspeed = 1000f;
+    public float rotationspeed = 10000f;
 
     // Start is called before the first frame update
     void Start()
