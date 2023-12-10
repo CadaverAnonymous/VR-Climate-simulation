@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
-
+using TMPro;
+using System.Runtime.InteropServices;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -22,33 +24,58 @@ public class NewBehaviourScript : MonoBehaviour
     public bool devmode = true;
     public float globeSpinningForce = 1000.0f;
     public float rotationspeed = 10000f;
+    
+    //referenced from weather stats to mess with UI
+    public weather_stats stats;
+    
 
+    private bool interacting = false;
+
+    public TextMeshProUGUI Texty;
+    public TextMeshProUGUI tempnum;
+    public TextMeshProUGUI windnum;
+    public TextMeshProUGUI rainTog;
+    public TextMeshProUGUI windtog;
+   
     // Start is called before the first frame update
     void Start()
     {
         //controller = GetComponent<CharacterController>();
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        float windspeed = stats.windSpeedv;
+        float temp = stats.temperatureF;
+        float rainchance = stats.PercentRain;
+        bool togwind = stats.toggle_wind;
+        bool tograin = stats.toggle_rain;
+
+        tempnum.text = temp.ToString();
+        windnum.text = windspeed.ToString();
+        rainTog.text = tograin.ToString();
+        windtog.text = togwind.ToString();
+        
+        
+        
+            
+        
+        Texty.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         //MOUSE MOVEMENT BLOCK_____________________________________________________________________________________________________
         // mouse variables
+
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
+        UnityEngine.Debug.Log("interacting before: " + interacting);
 
-        // this line enables camera rotation movement based on mouse movementmove on y and x axis
-        transform.Rotate(Vector3.up, mouseX * rotationSpeed * Time.deltaTime);
-        transform.Rotate(Vector3.left, mouseY * rotationSpeed * Time.deltaTime);
 
-        // lock z axis so camera doesnt get wonky
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0f);
         // MOUSE MOVEMENT BLOCK________________________________________________________________________________________________
 
-      
+
         //Make a ray assigned with no direction for raycasting
         Vector3 rayposition = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2, Camera.main.nearClipPlane));
 
@@ -59,36 +86,74 @@ public class NewBehaviourScript : MonoBehaviour
         //RaycastHit for the win!!! (this object gets the ray to actually tell us if its colliding with an object)
         RaycastHit DING;
 
+        //text feedback
+        if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING))
+        {
+           
+            if (DING.collider.gameObject.CompareTag("lever"))
+            {
+                Texty.enabled = true;
+                Texty.text = "Click and Drag to rotate lever.";
+            }
+            if (DING.collider.gameObject.CompareTag("Globe"))
+            {
+                Texty.enabled = true;
+                Texty.text = "Click and Drag to rotate Globe.";
+            }
+            if (DING.collider.gameObject.CompareTag("button"))
+            {
+                Texty.enabled = true;
+                Texty.text = "Click to press button";
+            }
+
+        }
+        
+        
         //now we detect for collisions. Don't ask me the specifics of how this function works cause i dont know either lol. found it in Unity API.
-        if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && Input.GetMouseButton(0) && DING.collider.gameObject.CompareTag("Globe"))
+        if (Input.GetMouseButton(0))
         {
-            //UnityEngine.Debug.DrawLine(rayposition, DING.point, Color.red, 5.0f);
-            //UnityEngine.Debug.Log("DING! " + DING.collider.gameObject.name);
-            Rigidbody rb = DING.collider.gameObject.GetComponent<Rigidbody>();
-            UnityEngine.Debug.Log("Spin globe");
+            if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && DING.collider.gameObject.CompareTag("Globe"))
+            {
+                interacting = true;
+                //UnityEngine.Debug.DrawLine(rayposition, DING.point, Color.red, 5.0f);
+                //UnityEngine.Debug.Log("DING! " + DING.collider.gameObject.name);
+                Rigidbody rb = DING.collider.gameObject.GetComponent<Rigidbody>();
+                UnityEngine.Debug.Log("Spin globe" + interacting);
 
-            rb.AddTorque(Vector3.up * -mouseX * rotationSpeed);
-            rb.AddTorque(Vector3.right * -mouseY * rotationSpeed);
-        }
-        if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && Input.GetMouseButton(0) && DING.collider.gameObject.CompareTag("lever"))
-        {
-            GameObject parentObject = DING.collider.gameObject.transform.parent.gameObject;
-            Rigidbody rb = parentObject.GetComponent<Rigidbody>();
-            
+                rb.AddTorque(Vector3.up * -mouseX * rotationSpeed);
+                rb.AddTorque(Vector3.right * -mouseY * rotationSpeed);
+            }
+            else if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && DING.collider.gameObject.CompareTag("lever"))
+            {
+                interacting = true;
+                GameObject parentObject = DING.collider.transform.parent.gameObject;
+                Rigidbody rb = parentObject.GetComponent<Rigidbody>();
+                
+                float rotation = -mouseX * rotationspeed * Time.deltaTime;
+                rb.AddTorque(Vector3.left * -mouseY * rotationSpeed);
+                UnityEngine.Debug.Log("Toggle lever" + interacting);
+            }
 
-            float rotation = -mouseX * rotationspeed * Time.deltaTime;
-            rb.AddTorque(rotation,0, 0);
-            UnityEngine.Debug.Log("Toggle lever");
-        }
-        if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && Input.GetMouseButton(0) && DING.collider.gameObject.CompareTag("button"))
-        {
-            UnityEngine.Debug.Log("Press button");
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            UnityEngine.Debug.Log("no ding... D:");
+            else if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && DING.collider.gameObject.CompareTag("button"))
+            {
+                UnityEngine.Debug.Log("Press button");
+            }
+            else 
+            {
+                UnityEngine.Debug.Log("no ding... D:");
+            }
         }
 
+        if (!interacting)
+        {
+            UnityEngine.Debug.Log("rotating camera");
+            rotatecamera(mouseX, mouseY);
+        }
+
+
+
+
+        UnityEngine.Debug.Log("interacting after: " + interacting);
 
         //CHARACTER MOVEMENT BLOCK________________________________________________________________________________________________________
         // time to apply movement based on camera rotation using WASD
@@ -123,7 +188,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
         //DEVMODE BLOCK__________________________________________________________________________________________________________________
-
+        interacting = false;
 
     }
 
@@ -132,6 +197,14 @@ public class NewBehaviourScript : MonoBehaviour
     
     }
 
+    void rotatecamera(float mouseX, float mouseY)
+    {
+        transform.Rotate(Vector3.up, mouseX * rotationSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.left, mouseY * rotationSpeed * Time.deltaTime);
+
+        // lock z axis so camera doesnt get wonky
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0f);
+    }
 
     void ToggleLever(GameObject lever)
     {
