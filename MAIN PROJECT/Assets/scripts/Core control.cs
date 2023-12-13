@@ -23,7 +23,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Vector3 Raycast;
     public bool devmode = true;
     public float globeSpinningForce = 1000.0f;
-    public float rotationspeed = 10000f;
+    public float rotationspeed = 1000f;
     
     //referenced from weather stats to mess with UI
     public weather_stats stats;
@@ -53,8 +53,8 @@ public class NewBehaviourScript : MonoBehaviour
         bool togwind = stats.toggle_wind;
         bool tograin = stats.toggle_rain;
 
-        tempnum.text = temp.ToString();
-        windnum.text = windspeed.ToString();
+        tempnum.text = Mathf.RoundToInt(temp).ToString();
+        windnum.text = Mathf.RoundToInt(windspeed).ToString();
         rainTog.text = tograin.ToString();
         windtog.text = togwind.ToString();
         
@@ -70,7 +70,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
-        UnityEngine.Debug.Log("interacting before: " + interacting);
+        //UnityEngine.Debug.Log("interacting before: " + interacting);
 
 
         // MOUSE MOVEMENT BLOCK________________________________________________________________________________________________
@@ -118,7 +118,7 @@ public class NewBehaviourScript : MonoBehaviour
                 //UnityEngine.Debug.DrawLine(rayposition, DING.point, Color.red, 5.0f);
                 //UnityEngine.Debug.Log("DING! " + DING.collider.gameObject.name);
                 Rigidbody rb = DING.collider.gameObject.GetComponent<Rigidbody>();
-                UnityEngine.Debug.Log("Spin globe" + interacting);
+                //UnityEngine.Debug.Log("Spin globe" + interacting);
 
                 rb.AddTorque(Vector3.up * -mouseX * rotationSpeed);
                 rb.AddTorque(Vector3.right * -mouseY * rotationSpeed);
@@ -131,7 +131,7 @@ public class NewBehaviourScript : MonoBehaviour
                 
                 float rotation = -mouseX * rotationspeed * Time.deltaTime;
                 rb.AddTorque(Vector3.left * -mouseY * rotationSpeed);
-                UnityEngine.Debug.Log("Toggle lever" + interacting);
+                //UnityEngine.Debug.Log("Toggle lever" + interacting);
             }
 
             else if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && DING.collider.gameObject.CompareTag("button"))
@@ -146,14 +146,14 @@ public class NewBehaviourScript : MonoBehaviour
 
         if (!interacting)
         {
-            UnityEngine.Debug.Log("rotating camera");
+            //UnityEngine.Debug.Log("rotating camera");
             rotatecamera(mouseX, mouseY);
         }
 
 
 
 
-        UnityEngine.Debug.Log("interacting after: " + interacting);
+        //UnityEngine.Debug.Log("interacting after: " + interacting);
 
         //CHARACTER MOVEMENT BLOCK________________________________________________________________________________________________________
         // time to apply movement based on camera rotation using WASD

@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlaySoundOnButtonPress : MonoBehaviour
 {
@@ -17,5 +18,10 @@ public class PlaySoundOnButtonPress : MonoBehaviour
         {
             UnityEngine.Debug.LogError("AudioSource is not assigned. Please assign it in the Inspector window.");
         }
+    }
+
+    public void NextScene()
+    {
+        SceneManager.LoadScene("Test scene");
     }
 }
