@@ -47,9 +47,9 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float windspeed = stats.windSpeedv;
+        float windspeed = stats.windvelocity;
         float temp = stats.temperatureF;
-        float rainchance = stats.PercentRain;
+        float rainchance = stats.percentRain;
         bool togwind = stats.toggle_wind;
         bool tograin = stats.toggle_rain;
 
