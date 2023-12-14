@@ -23,7 +23,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Vector3 Raycast;
     public bool devmode = true;
     public float globeSpinningForce = 1000.0f;
-    public float rotationspeed = 1000f;
+    public float rotationspeed = 10f;
     
     //referenced from weather stats to mess with UI
     public weather_stats stats;
@@ -130,7 +130,7 @@ public class NewBehaviourScript : MonoBehaviour
                 Rigidbody rb = parentObject.GetComponent<Rigidbody>();
                 
                 float rotation = -mouseX * rotationspeed * Time.deltaTime;
-                rb.AddTorque(Vector3.left * -mouseY * rotationSpeed);
+                rb.AddTorque(Vector3.left * -mouseY );
                 //UnityEngine.Debug.Log("Toggle lever" + interacting);
             }
 

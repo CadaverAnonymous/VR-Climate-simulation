@@ -25,7 +25,10 @@ public class weather_stats : MonoBehaviour
     public Vector3 windSpeedv;
     
 
-    public ParticleSystem particleSystem;
+    public ParticleSystem rain;
+    public ParticleSystem snow;
+
+
     private float maxtemp = 120;
     private float mintemp = -30;
     private float maxwind = 300;
@@ -37,9 +40,8 @@ public class weather_stats : MonoBehaviour
 
     public AudioSource rainsound;
     public AudioSource lowwind;
-    public AudioSource mediumwind;
     public AudioSource Highwind;
-    public AudioSource hurricane;
+    
     
     
     public List<GameObject> leverObjects = new List<GameObject>();
@@ -59,62 +61,113 @@ public class weather_stats : MonoBehaviour
         Flag.externalAcceleration = windSpeedv;
         if (toggle_rain == true && percentRain > 50)
         {
-            particleSystem.Play();
-            if (!rainsound.isPlaying)
+            if (temperatureF < 32)
             {
-                rainsound.Play();
+                ChangeToSnow();
+                Stoprain();
+                floor.GetComponent<MeshRenderer>().material = snowmat;
             }
-            rainsound.volume = 1;
+            else
+            {
+                ChangeToRain();
+                StopSnow();
+                floor.GetComponent<MeshRenderer>().material = GreenMat;
+
+            }
         }
         else
         {
-            particleSystem.Stop();
-            if (rainsound.isPlaying)
-            {
-                rainsound.Pause();
-            }
-            rainsound.volume = 0;
+            stopboth();
         }
 
-        if (temperatureF < 32)
+        if (toggle_wind == true && windvelocity > 20 && windvelocity < 50)
         {
-            ChangeToSnow();
-            floor.GetComponent<MeshRenderer>().material = snowmat;
+            smallwindnoise();
+        }
+        else if (toggle_wind == true && windvelocity > 50)
+        {
+            highwindnoise();
         }
         else
         {
-            ChangeToRain();
-            floor.GetComponent<MeshRenderer>().material = GreenMat;
-
+            stopwindnoise();
         }
+
+        
 
         changestatlever();
 
         
 
 
-        if (temperatureF < 32)
-        {
-            ChangeToSnow();
-        }
-        else
-        {
-            ChangeToRain();
-        }
+        
     }
 
     void ChangeToRain()
     {
-        var mainMod = particleSystem.main; // Added '=' and changed var type
-
-        mainMod.startSpeed = rainSpeed;
+        rain.Play();
+        if (!rainsound.isPlaying)
+        {
+            rainsound.Play();
+        }
+       
 
     }
 
     void ChangeToSnow()
     {
-        var mainMod = particleSystem.main; // Added '=' and changed var type
-        mainMod.startSpeed = snowSpeed;
+        if(rain.isPlaying)
+        {
+            rain.Stop();
+            rainsound.Stop();
+        }
+        snow.Play();
+        
+    }
+
+    void Stoprain()
+    {
+       
+        rain.Stop();
+        rainsound.Stop();
+    }
+
+    void StopSnow()
+    {
+        snow.Stop();
+    
+    }
+
+    void stopboth()
+    {
+        rain.Stop();
+        snow.Stop();
+    }
+
+    void smallwindnoise()
+    {
+        
+        if (!lowwind.isPlaying)
+        {
+            UnityEngine.Debug.Log("small wind is playing");
+            lowwind.Play();
+        }
+        Highwind.Stop();
+    }
+    void highwindnoise()
+    {
+        if (!Highwind.isPlaying)
+        {
+            UnityEngine.Debug.Log("high wind is playing");
+            Highwind.Play();
+        }
+        lowwind.Stop();
+    }
+
+    void stopwindnoise()
+    {
+        Highwind.Stop();
+        lowwind.Stop();
     }
 
     void changestatlever()
