@@ -250,7 +250,7 @@ public class NewBehaviourScript : MonoBehaviour
     }
     void RestoreControls(GameObject uiEmptymain, GameObject uiEmptypause)
     {
-       
+        interacting = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         uiEmptymain.SetActive(true);

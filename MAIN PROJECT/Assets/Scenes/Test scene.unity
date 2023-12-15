@@ -669,7 +669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &288175648
 Transform:
   m_ObjectHideFlags: 0
@@ -5529,7 +5529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &376219673
 Transform:
   m_ObjectHideFlags: 0
@@ -8677,9 +8677,9 @@ MonoBehaviour:
   globeSpinningForce: 50
   rotationspeed: 100
   stats: {fileID: 943134404}
-  uiEmptymain: {fileID: 0}
-  uiEmptypause: {fileID: 0}
-  devmode: 1
+  uiEmptymain: {fileID: 288175647}
+  uiEmptypause: {fileID: 376219672}
+  devmode: 0
   Texty: {fileID: 1850840355}
   tempnum: {fileID: 52315058}
   windnum: {fileID: 1108943539}
