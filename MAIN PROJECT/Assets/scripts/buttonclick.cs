@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class PlaySoundOnButtonPress : MonoBehaviour
 {
     public AudioSource audioSource; // Assign the AudioSource component to this variable in the Inspector window
@@ -23,5 +24,10 @@ public class PlaySoundOnButtonPress : MonoBehaviour
     public void NextScene()
     {
         SceneManager.LoadScene("Test scene");
+    }
+
+    public void quitGame()
+    {
+        Application.Quit();
     }
 }

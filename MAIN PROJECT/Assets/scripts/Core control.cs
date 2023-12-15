@@ -21,22 +21,28 @@ public class NewBehaviourScript : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     public Vector3 Raycast;
-    public bool devmode = true;
+    
     public float globeSpinningForce = 1000.0f;
     public float rotationspeed = 10f;
     
     //referenced from weather stats to mess with UI
     public weather_stats stats;
+
+    public GameObject uiEmptymain;
+    public GameObject uiEmptypause;
     
 
     private bool interacting = false;
+    public bool devmode = true;
 
     public TextMeshProUGUI Texty;
     public TextMeshProUGUI tempnum;
     public TextMeshProUGUI windnum;
+    public TextMeshProUGUI downpour;
+    public TextMeshProUGUI percentRain;
     public TextMeshProUGUI rainTog;
     public TextMeshProUGUI windtog;
-   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -107,7 +113,21 @@ public class NewBehaviourScript : MonoBehaviour
             }
 
         }
-        
+
+        if (!uiEmptypause.activeSelf)
+        {
+            if (devmode == false && Input.GetKeyDown(KeyCode.Escape))
+            {
+                PauseMenu(uiEmptymain, uiEmptypause);
+            }
+        }
+        else
+        {
+            if (devmode == false && Input.GetKeyDown(KeyCode.Escape))
+            {
+                RestoreControls(uiEmptymain, uiEmptypause);
+            }
+        }
         
         //now we detect for collisions. Don't ask me the specifics of how this function works cause i dont know either lol. found it in Unity API.
         if (Input.GetMouseButton(0))
@@ -218,6 +238,23 @@ public class NewBehaviourScript : MonoBehaviour
     {
         UnityEngine.Debug.Log("Press button");
         // Add button pressing functionality here
+    }
+
+    void PauseMenu(GameObject uiEmptymain, GameObject uiEmptypause)
+    {
+        interacting = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        uiEmptymain.SetActive(false);
+        uiEmptypause.SetActive(true);
+    }
+    void RestoreControls(GameObject uiEmptymain, GameObject uiEmptypause)
+    {
+       
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        uiEmptymain.SetActive(true);
+        uiEmptypause.SetActive(false);
     }
 
 }
