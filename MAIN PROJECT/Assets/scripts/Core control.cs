@@ -199,16 +199,16 @@ public class NewBehaviourScript : MonoBehaviour
 
         //DEVMODE BLOCK__________________________________________________________________________________________________________________
         //escape testing if devmode is enabled for my conveniance in testing.
-        if (devmode == true && Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (EditorApplication.isPlaying)
-            {
-                EditorApplication.isPlaying = false;
-            }
-        }
+        //if (devmode == true && Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if (EditorApplication.isPlaying)
+        //    {
+        //        EditorApplication.isPlaying = false;
+        //    }
+        //}
 
         //DEVMODE BLOCK__________________________________________________________________________________________________________________
-        interacting = false;
+        //interacting = false;
 
     }
 
