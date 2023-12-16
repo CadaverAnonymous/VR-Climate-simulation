@@ -140,8 +140,8 @@ public class NewBehaviourScript : MonoBehaviour
                 Rigidbody rb = DING.collider.gameObject.GetComponent<Rigidbody>();
                 //UnityEngine.Debug.Log("Spin globe" + interacting);
 
-                rb.AddTorque(Vector3.up * -mouseX * rotationSpeed);
-                rb.AddTorque(Vector3.right * -mouseY * rotationSpeed);
+                rb.AddTorque(Vector3.up * -mouseX);
+                rb.AddTorque(Vector3.right * -mouseY);
             }
             else if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && DING.collider.gameObject.CompareTag("lever"))
             {
