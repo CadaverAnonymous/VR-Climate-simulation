@@ -140,8 +140,8 @@ public class NewBehaviourScript : MonoBehaviour
                 Rigidbody rb = DING.collider.gameObject.GetComponent<Rigidbody>();
                 //UnityEngine.Debug.Log("Spin globe" + interacting);
 
-                rb.AddTorque(Vector3.up * -mouseX * rotationSpeed);
-                rb.AddTorque(Vector3.right * -mouseY * rotationSpeed);
+                rb.AddTorque(Vector3.up * -mouseX);
+                rb.AddTorque(Vector3.right * -mouseY);
             }
             else if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && DING.collider.gameObject.CompareTag("lever"))
             {
@@ -199,6 +199,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         //DEVMODE BLOCK__________________________________________________________________________________________________________________
         //escape testing if devmode is enabled for my conveniance in testing.
+<<<<<<< HEAD
         //if (devmode == true && Input.GetKeyDown(KeyCode.Escape))
         //{
         //    if (EditorApplication.isPlaying)
@@ -206,6 +207,9 @@ public class NewBehaviourScript : MonoBehaviour
         //        EditorApplication.isPlaying = false;
         //    }
         //}
+=======
+        
+>>>>>>> cba02e9bc062865f593f2d3b533c1435ad5b80de
 
         //DEVMODE BLOCK__________________________________________________________________________________________________________________
         //interacting = false;
