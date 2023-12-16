@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class weather_stats : MonoBehaviour
 {
-    public GameObject floor;
-    public Material snowmat;
-    public Material GreenMat;
+    
     
     public float Downpour = 1;
     public float percentRain = 0;
@@ -65,13 +63,13 @@ public class weather_stats : MonoBehaviour
             {
                 ChangeToSnow();
                 Stoprain();
-                floor.GetComponent<MeshRenderer>().material = snowmat;
+                
             }
             else
             {
                 ChangeToRain();
                 StopSnow();
-                floor.GetComponent<MeshRenderer>().material = GreenMat;
+                
 
             }
         }

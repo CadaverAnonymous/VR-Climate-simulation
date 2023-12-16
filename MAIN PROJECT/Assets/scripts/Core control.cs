@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using UnityEngine.EditorApplication;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using TMPro;
@@ -199,13 +199,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         //DEVMODE BLOCK__________________________________________________________________________________________________________________
         //escape testing if devmode is enabled for my conveniance in testing.
-        if (devmode == true && Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (EditorApplication.isPlaying)
-            {
-                EditorApplication.isPlaying = false;
-            }
-        }
+        
 
         //DEVMODE BLOCK__________________________________________________________________________________________________________________
         interacting = false;
