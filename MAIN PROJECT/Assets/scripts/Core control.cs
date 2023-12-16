@@ -197,22 +197,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         //CHARACTER MOVEMENT BLOCK________________________________________________________________________________________________________
 
-        //DEVMODE BLOCK__________________________________________________________________________________________________________________
-        //escape testing if devmode is enabled for my conveniance in testing.
-<<<<<<< HEAD
-        //if (devmode == true && Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    if (EditorApplication.isPlaying)
-        //    {
-        //        EditorApplication.isPlaying = false;
-        //    }
-        //}
-=======
-        
->>>>>>> cba02e9bc062865f593f2d3b533c1435ad5b80de
-
-        //DEVMODE BLOCK__________________________________________________________________________________________________________________
-        //interacting = false;
+       
 
     }
 
