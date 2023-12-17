@@ -23,7 +23,7 @@ public class PlaySoundOnButtonPress : MonoBehaviour
 
     public void NextScene()
     {
-        SceneManager.LoadScene("Test scene");
+        SceneManager.LoadScene("Climate Sim");
     }
 
     public void quitGame()

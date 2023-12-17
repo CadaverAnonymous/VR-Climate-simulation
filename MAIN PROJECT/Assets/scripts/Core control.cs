@@ -5,6 +5,7 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using UnityEngine.XR;
 using TMPro;
 using System.Runtime.InteropServices;
 
@@ -21,16 +22,16 @@ public class NewBehaviourScript : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     public Vector3 Raycast;
-    
+
     public float globeSpinningForce = 1000.0f;
     public float rotationspeed = 10f;
-    
+
     //referenced from weather stats to mess with UI
     public weather_stats stats;
 
     public GameObject uiEmptymain;
     public GameObject uiEmptypause;
-    
+
 
     private bool interacting = false;
     public bool devmode = true;
@@ -49,11 +50,7 @@ public class NewBehaviourScript : MonoBehaviour
     public List<GameObject> buttonObjects = new List<GameObject>();
 
     // Start is called before the first frame update
-    void Start()
-    {
-        //controller = GetComponent<CharacterController>();
-        
-    }
+   
 
     // Update is called once per frame
     void Update()

@@ -5,15 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/start Screen.unity
     guid: f59ceb0be33184245bdbb4e73baf5ad5
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Test scene.unity
-    guid: fcddfbfd19f70cd48840224fe7601da5
+    path: Assets/Scenes/Climate Sim.unity
+    guid: 17d8cb88c04b2074e8aed6fa0f6f5c8e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 9df5b882e66be3f409a1dc7910fb0045,
       type: 2}
