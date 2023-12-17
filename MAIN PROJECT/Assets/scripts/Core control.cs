@@ -35,6 +35,9 @@ public class NewBehaviourScript : MonoBehaviour
     private bool interacting = false;
     public bool devmode = true;
 
+    public Button back;
+    public Button quit;
+
     public TextMeshProUGUI Texty;
     public TextMeshProUGUI tempnum;
     public TextMeshProUGUI windnum;
@@ -55,7 +58,7 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
 
         float windspeed = stats.windvelocity;
         float temp = stats.temperatureF;
@@ -71,15 +74,40 @@ public class NewBehaviourScript : MonoBehaviour
         downpour.text = Mathf.RoundToInt(pour).ToString();
         percentRain.text = Mathf.RoundToInt(rainchance).ToString();
 
-
-
-
+        if (!uiEmptypause.activeSelf)
+        {
+            if (devmode == false && Input.GetKeyDown(KeyCode.E))
+            {
+                PauseMenu(uiEmptymain, uiEmptypause);
+            }
+        }
+        else
+        {
+            if (back.interactable && Input.GetAxis("Jump") == 1)
+            {
+                back.onClick.Invoke();
+            }
+            if (quit.interactable && Input.GetAxis("Jump") == 1)
+            {
+                quit.onClick.Invoke();
+            }
+            
+        }
+        bool cursordebug = Cursor.lockState == CursorLockMode.Locked;
+        if (cursordebug)
+        {
+            UnityEngine.Debug.Log("cursor is on");
+        }
+        else 
+        {
+            UnityEngine.Debug.Log("cursor is off");
+        }
         Texty.enabled = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+
         //MOUSE MOVEMENT BLOCK_____________________________________________________________________________________________________
         // mouse variables
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
         //UnityEngine.Debug.Log("interacting before: " + interacting);
@@ -120,20 +148,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         }
 
-        if (!uiEmptypause.activeSelf)
-        {
-            if (devmode == false && Input.GetKeyDown(KeyCode.Escape))
-            {
-                PauseMenu(uiEmptymain, uiEmptypause);
-            }
-        }
-        else
-        {
-            if (devmode == false && Input.GetKeyDown(KeyCode.Escape))
-            {
-                RestoreControls(uiEmptymain, uiEmptypause);
-            }
-        }
+        
         
         
         if (Input.GetMouseButton(0))
@@ -165,10 +180,11 @@ public class NewBehaviourScript : MonoBehaviour
             {
                 GameObject Buttonhit = DING.transform.gameObject;
                 string Buttonname = Buttonhit.name;
+                //button for houston in the summer
                 if (Buttonname == "Button 1")
                 {
                     stats.temperatureF = 101f;
-                    stats.percentRain = 30;
+                    stats.percentRain = 100;
                     stats.windvelocity = 7;
                     stats.Downpour = 10;
                 }
@@ -188,8 +204,8 @@ public class NewBehaviourScript : MonoBehaviour
                 }
                 if (Buttonname == "Button 4")
                 {
-                    stats.temperatureF = 40f;
-                    stats.percentRain = 0;
+                    stats.temperatureF = 20f;
+                    stats.percentRain = 100;
                     stats.windvelocity = 30;
                     stats.Downpour = 10;
                 }
@@ -272,8 +288,11 @@ public class NewBehaviourScript : MonoBehaviour
     void PauseMenu(GameObject uiEmptymain, GameObject uiEmptypause)
     {
         
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            
+        
         uiEmptymain.SetActive(false);
         uiEmptypause.SetActive(true);
     }

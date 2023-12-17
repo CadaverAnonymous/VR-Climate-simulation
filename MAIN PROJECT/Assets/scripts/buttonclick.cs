@@ -30,4 +30,8 @@ public class PlaySoundOnButtonPress : MonoBehaviour
     {
         Application.Quit();
     }
+    public void selectDebug()
+    {
+        UnityEngine.Debug.Log("Selected");
+    }
 }

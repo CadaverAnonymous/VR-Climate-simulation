@@ -62,7 +62,7 @@ public class weather_stats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        UnityEngine.Debug.Log("percent chance: " + percentRain);
 
         Flag.externalAcceleration = windSpeedv;
         if (toggle_rain == true && percentRain > 50)
@@ -147,6 +147,7 @@ public class weather_stats : MonoBehaviour
     void stopboth()
     {
         rain.Stop();
+        rainsound.Stop();
         snow.Stop();
     }
 
