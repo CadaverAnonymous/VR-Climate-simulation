@@ -91,7 +91,7 @@ public class NewBehaviourScript : MonoBehaviour
         //now we test if the ray is working as we need it. Ray is just pointing out at stuff and its not doing anything. TIME TO CHANGE THAT!!!!
         //RaycastHit for the win!!! (this object gets the ray to actually tell us if its colliding with an object)
         RaycastHit DING;
-
+        UnityEngine.Debug.Log("Interacting = " + interacting);
         //text feedback
         if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING))
         {
@@ -129,7 +129,7 @@ public class NewBehaviourScript : MonoBehaviour
             }
         }
         
-        //now we detect for collisions. Don't ask me the specifics of how this function works cause i dont know either lol. found it in Unity API.
+        
         if (Input.GetMouseButton(0))
         {
             if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && DING.collider.gameObject.CompareTag("Globe"))
@@ -148,11 +148,12 @@ public class NewBehaviourScript : MonoBehaviour
                 interacting = true;
                 GameObject parentObject = DING.collider.transform.parent.gameObject;
                 Rigidbody rb = parentObject.GetComponent<Rigidbody>();
-                
+
                 float rotation = -mouseX * rotationspeed * Time.deltaTime;
-                rb.AddTorque(Vector3.left * -mouseY );
+                rb.AddTorque(Vector3.left * mouseY);
                 //UnityEngine.Debug.Log("Toggle lever" + interacting);
             }
+            
 
             else if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && DING.collider.gameObject.CompareTag("button"))
             {
@@ -162,6 +163,10 @@ public class NewBehaviourScript : MonoBehaviour
             {
                 UnityEngine.Debug.Log("no ding... D:");
             }
+        }
+        else
+        {
+            interacting = false;
         }
 
         if (!interacting)
@@ -192,12 +197,12 @@ public class NewBehaviourScript : MonoBehaviour
         movement = cameraTransform.TransformDirection(movement);
         movement.y = 0;
         movement.Normalize();
-        // WE HAVE MOVEMENT BITCHES!!!! (this line allows us to change the position of the character in real time based on WASD directions)
+        // WE HAVE MOVEMENT!!!! (this line allows us to change the position of the character in real time based on WASD directions)
         transform.position += movement * speed * Time.deltaTime;
 
         //CHARACTER MOVEMENT BLOCK________________________________________________________________________________________________________
+        UnityEngine.Debug.Log("Interacting = " + interacting);
 
-       
 
     }
 
@@ -231,7 +236,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void PauseMenu(GameObject uiEmptymain, GameObject uiEmptypause)
     {
-        interacting = true;
+        
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         uiEmptymain.SetActive(false);
@@ -239,7 +244,7 @@ public class NewBehaviourScript : MonoBehaviour
     }
     void RestoreControls(GameObject uiEmptymain, GameObject uiEmptypause)
     {
-        interacting = false;
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         uiEmptymain.SetActive(true);
