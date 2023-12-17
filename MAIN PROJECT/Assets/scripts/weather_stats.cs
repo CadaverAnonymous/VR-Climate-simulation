@@ -48,7 +48,7 @@ public class weather_stats : MonoBehaviour
     public float lowmax = 230;
 
     public List<GameObject> leverObjects = new List<GameObject>();
-    public List<GameObject> buttonObjects = new List<GameObject>();
+    
 
 
 

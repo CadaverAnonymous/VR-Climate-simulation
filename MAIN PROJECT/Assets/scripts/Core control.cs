@@ -43,6 +43,8 @@ public class NewBehaviourScript : MonoBehaviour
     public TextMeshProUGUI rainTog;
     public TextMeshProUGUI windtog;
 
+    public List<GameObject> buttonObjects = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,9 +55,12 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         float windspeed = stats.windvelocity;
         float temp = stats.temperatureF;
         float rainchance = stats.percentRain;
+        float pour = stats.Downpour;
         bool togwind = stats.toggle_wind;
         bool tograin = stats.toggle_rain;
 
@@ -63,11 +68,12 @@ public class NewBehaviourScript : MonoBehaviour
         windnum.text = Mathf.RoundToInt(windspeed).ToString();
         rainTog.text = tograin.ToString();
         windtog.text = togwind.ToString();
-        
-        
-        
-            
-        
+        downpour.text = Mathf.RoundToInt(pour).ToString();
+        percentRain.text = Mathf.RoundToInt(rainchance).ToString();
+
+
+
+
         Texty.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -109,7 +115,7 @@ public class NewBehaviourScript : MonoBehaviour
             if (DING.collider.gameObject.CompareTag("button"))
             {
                 Texty.enabled = true;
-                Texty.text = "Click to press button";
+                Texty.text = "press to change weather";
             }
 
         }
@@ -157,7 +163,36 @@ public class NewBehaviourScript : MonoBehaviour
 
             else if (Physics.Raycast(Camera.main.transform.position, rayDirection, out DING) && DING.collider.gameObject.CompareTag("button"))
             {
-                UnityEngine.Debug.Log("Press button");
+                GameObject Buttonhit = DING.transform.gameObject;
+                string Buttonname = Buttonhit.name;
+                if (Buttonname == "Button 1")
+                {
+                    stats.temperatureF = 101f;
+                    stats.percentRain = 30;
+                    stats.windvelocity = 7;
+                    stats.Downpour = 10;
+                }
+                if (Buttonname == "Button 2")
+                {
+                    stats.temperatureF = 60f;
+                    stats.percentRain = 100;
+                    stats.windvelocity = 7;
+                    stats.Downpour = 100;
+                }
+                if (Buttonname == "Button 3")
+                {
+                    stats.temperatureF = 80f;
+                    stats.percentRain = 0;
+                    stats.windvelocity = 30;
+                    stats.Downpour = 10;
+                }
+                if (Buttonname == "Button 4")
+                {
+                    stats.temperatureF = 40f;
+                    stats.percentRain = 0;
+                    stats.windvelocity = 30;
+                    stats.Downpour = 10;
+                }
             }
             else 
             {
@@ -250,5 +285,9 @@ public class NewBehaviourScript : MonoBehaviour
         uiEmptymain.SetActive(true);
         uiEmptypause.SetActive(false);
     }
-
+    void ButtonPress()
+    { 
+    
+    
+    }
 }
