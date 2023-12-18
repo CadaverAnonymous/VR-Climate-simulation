@@ -12,6 +12,7 @@ public class weather_stats : MonoBehaviour
     public float Downpour = 1;
     public float percentRain = 0;
     public float temperatureF = 70f;
+    public float Humidity = 100;
     public float snowSpeed = 5f; // Changed to float as it's a speed value
     public float rainSpeed = 10f; // Changed to float as it's a speed value
     public float downpour = 10f;
@@ -36,6 +37,8 @@ public class weather_stats : MonoBehaviour
     private float minpercent = 0;
     private float maxdownpour = 100;
     private float mindownpour = 0;
+    private float maxhumid = 100;
+    private float minhumid = 0;
 
     public AudioSource rainsound;
     public AudioSource lowwind;
@@ -156,7 +159,7 @@ public class weather_stats : MonoBehaviour
 
         if (!lowwind.isPlaying)
         {
-            UnityEngine.Debug.Log("small wind is playing");
+            //UnityEngine.Debug.Log("small wind is playing");
             lowwind.Play();
         }
         Highwind.Stop();
@@ -165,7 +168,7 @@ public class weather_stats : MonoBehaviour
     {
         if (!Highwind.isPlaying)
         {
-            UnityEngine.Debug.Log("high wind is playing");
+           // UnityEngine.Debug.Log("high wind is playing");
             Highwind.Play();
         }
         lowwind.Stop();
@@ -188,6 +191,8 @@ public class weather_stats : MonoBehaviour
         float Lever2Rotate = leverObjects[2].transform.rotation.eulerAngles.z;
         float Lever3Rotate = leverObjects[3].transform.rotation.eulerAngles.z;
         float Lever4Rotate = leverObjects[4].transform.rotation.eulerAngles.z;
+        float Lever5Rotate = leverObjects[5].transform.rotation.eulerAngles.z;
+        //UnityEngine.Debug.Log("lever rotation" + Lever5Rotate);
         // Lever2Rotate = leverObjects[2].transform.rotate.eulerangles.x
         //Lever3Rotate = leverObjects[3].transform.rotate.eulerangles.x
         if (Lever1Rotate > Highmin && Lever1Rotate < Highmax && temperatureF < maxtemp)
@@ -265,6 +270,22 @@ public class weather_stats : MonoBehaviour
 
             rainmain.rateOverTime = downpour;
             snowmain.rateOverTime = downpour;
+        }
+        if (Lever5Rotate > Highmin && Lever5Rotate < Highmax && Humidity < maxhumid)
+        {
+            UnityEngine.Debug.Log(Highmin);
+            //UnityEngine.Debug.Log("Current Lever Rotation: " + Lever1Rotate);
+            //UnityEngine.Debug.Log("Current Temperature: " + temperatureF);
+
+            UnityEngine.Debug.Log("raising percentage of humidity");
+
+            Humidity += .01f;
+        }
+        if (Lever5Rotate < lowmax && Lever5Rotate > lowmin && Humidity > minhumid)
+
+        {
+            UnityEngine.Debug.Log("lowering percentage of humidity");
+            Humidity -= .01f;
         }
     }
 }

@@ -19,6 +19,7 @@ public class buttonselect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (start.interactable && Input.GetAxis("Jump") == 1)
         {
 

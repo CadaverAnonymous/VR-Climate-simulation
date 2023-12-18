@@ -5,14 +5,14 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
-using UnityEngine.XR;
+
 using TMPro;
 using System.Runtime.InteropServices;
 
 public class NewBehaviourScript : MonoBehaviour
 {
 
-    //WASSUP!!! this is the character core controller which houses pretty much the entire character rig. 
+    //this is the character core controller which houses pretty much the entire character rig. 
 
     //variables that we need for the implementation.
     public float speed = 5f;
@@ -46,6 +46,7 @@ public class NewBehaviourScript : MonoBehaviour
     public TextMeshProUGUI percentRain;
     public TextMeshProUGUI rainTog;
     public TextMeshProUGUI windtog;
+    public TextMeshProUGUI Humidity;
 
     public List<GameObject> buttonObjects = new List<GameObject>();
 
@@ -61,6 +62,7 @@ public class NewBehaviourScript : MonoBehaviour
         float temp = stats.temperatureF;
         float rainchance = stats.percentRain;
         float pour = stats.Downpour;
+        float humid = stats.Humidity;
         bool togwind = stats.toggle_wind;
         bool tograin = stats.toggle_rain;
 
@@ -70,6 +72,7 @@ public class NewBehaviourScript : MonoBehaviour
         windtog.text = togwind.ToString();
         downpour.text = Mathf.RoundToInt(pour).ToString();
         percentRain.text = Mathf.RoundToInt(rainchance).ToString();
+        Humidity.text = Mathf.RoundToInt(humid).ToString(); 
 
         if (!uiEmptypause.activeSelf)
         {
@@ -184,6 +187,7 @@ public class NewBehaviourScript : MonoBehaviour
                     stats.percentRain = 100;
                     stats.windvelocity = 7;
                     stats.Downpour = 10;
+                    stats.Humidity = 80;
                 }
                 if (Buttonname == "Button 2")
                 {
@@ -191,6 +195,7 @@ public class NewBehaviourScript : MonoBehaviour
                     stats.percentRain = 100;
                     stats.windvelocity = 7;
                     stats.Downpour = 100;
+                    stats.Humidity = 70;
                 }
                 if (Buttonname == "Button 3")
                 {
@@ -198,6 +203,7 @@ public class NewBehaviourScript : MonoBehaviour
                     stats.percentRain = 0;
                     stats.windvelocity = 30;
                     stats.Downpour = 10;
+                    stats.Humidity = 70;
                 }
                 if (Buttonname == "Button 4")
                 {
@@ -205,6 +211,7 @@ public class NewBehaviourScript : MonoBehaviour
                     stats.percentRain = 100;
                     stats.windvelocity = 30;
                     stats.Downpour = 10;
+                    stats.Humidity = 70;
                 }
             }
             else 

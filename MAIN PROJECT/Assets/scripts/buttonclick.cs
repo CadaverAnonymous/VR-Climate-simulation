@@ -28,10 +28,12 @@ public class PlaySoundOnButtonPress : MonoBehaviour
 
     public void quitGame()
     {
+        UnityEngine.Debug.Log("quit");
         Application.Quit();
     }
     public void selectDebug()
     {
-        UnityEngine.Debug.Log("Selected");
+
+        UnityEngine.Debug.Log("quit Selected");
     }
 }

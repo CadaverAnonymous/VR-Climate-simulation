@@ -1,0 +1,32 @@
+Instructions on how to play.
+
+there are 3 types of interactable objects in the game:
+
+- Levers: when pulled up or down will change the weather of the game. each lever changes a different
+statistic paramater. Each paramater affects the weather.
+
+- Globe: click and drag to spin the globe of the world around.
+
+- Buttons: when pressed will change the weather. The current presets are currently 
+based on loose approximations of Houston and New York City's average weather parameters. 
+
+with mouse and keyboard there is also fully functional FPS movement that use WASD to move.
+
+Press E to open the pause menu and press W or A to change selectable buttons and spacebar to select an 
+option. selecting back will take you back into the game's main UI and selecting quit will quit the game.
+
+start menu buttons will be selected with the mouse. start will load the simulation, credits will take you
+to the credits section and the quit button will quit the game.
+
+VR instructions:
+
+Game cannot be played from the start menu. Menu requires mouse to operate and cannot operate with controller
+because didn't have enough time to debug the menu navigation system. 
+
+In build settings remove the start menu and add the Climate Sim scene. Game can be played in VR and regular builds from there.
+
+similar issues with the pause menu. Same as the start menu, the selection system will press both buttons at the same time. 
+spent two days trying to fix this but ran out of time.
+
+movement does not work in VR but selection and camera movement does so simulation is playable in VR.
+
